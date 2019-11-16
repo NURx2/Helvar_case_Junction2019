@@ -15,7 +15,7 @@ COLOUR_TEMPERATURE_ARRAY   =  [6500,   6400,  6300,   6200,  6100,  6000,  5900,
 # Mapped values of color temperature to in HEX
 COLOUR_TEMPERATURE_HEX_ARRAY = ["1964","1900", "189C","1838","17D4","1770","170c","16A8","1644","15E0","157C","1518","14B4","1450","13EC","1388","1324","12C0","125C","11F8","1194","1130",    "10CC","1068","1004","0FA0", "0F3C", "0ED8", "0E74", "0E10","0DAC","0D48", "0CE4","0C80","0C1C" ,"0BB8", "0B54","0AF0", "0A8C"]
 
-LUMINAIRE_IDS = ["EB39", "EB30"]
+LUMINAIRE_IDS = ["EB22", "EB30"]
 
 LUMINAIRE_ID = "EB39" #Example A1B3
 
@@ -84,7 +84,7 @@ def set_light_level_color_temperature(_serialDevice, _lightLevelValue =50, _colo
             ser = _serialDevice
             lightValIndex = min(range(len(LIGHT_LEVEL_ARRAY)), key = lambda i: abs(LIGHT_LEVEL_ARRAY[i]-_lightLevelValue))
             colourTempValIndex = min(range(len(COLOUR_TEMPERATURE_ARRAY)), key = lambda i: abs(COLOUR_TEMPERATURE_ARRAY[i]-_colourTemperatureValue))
-            serial_msg = '25' + str(LUMINAIRE_IDS[id]) + '0017' + str(DALI_LIGHT_LEVEL_HEX_ARRAY[lightValIndex]) + str(COLOUR_TEMPERATURE_HEX_ARRAY[colourTempValIndex]) + LUMIAIRE_MODE + 'FF\n'
+            serial_msg = '25' + str(LUMINAIRE_IDS[0]) + '0017' + str(DALI_LIGHT_LEVEL_HEX_ARRAY[lightValIndex]) + str(COLOUR_TEMPERATURE_HEX_ARRAY[colourTempValIndex]) + LUMIAIRE_MODE + 'FF\n'
             # uncomment for debugging
             print("writing " , str(serial_msg).encode() , " to " + str(_serialDevice.port))
             ser.write(str(serial_msg).encode())

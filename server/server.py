@@ -67,7 +67,7 @@ def remote_control_socket(id, level, temp):
 	socketio.emit('update', {'id': id, 'level': level, 'temp': temp })
 	if id == 0:
 		lightControl.control_light(level, temp, 0)
-	return "OK"
+	return {"result": "OK"}
 
 @socketio.on('update_light')
 def update_light_socket(data):
@@ -78,6 +78,17 @@ def update_light_socket(data):
 def blink_socket(data):
 	print(data)
 	lightControl.blink()
+
+@app.route('/remote_smart_demo')
+def remote_smart_demo():
+	socketio.emit('remote_smart_demo', {})
+	return {"result": "OK"}
+
+@app.route('/remote_enter')
+def remote_enter():
+	socketio.emit('move', {'frm': 'outside', 'to': 'entrance'})
+	lightControl.switch_on_entrance()
+	return "OK"
 
 
 if __name__ == '__main__':
