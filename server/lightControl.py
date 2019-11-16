@@ -25,7 +25,7 @@ LUMIAIRE_MODE = "00"
 
 
 
-
+ls =[]
 
 def get_serial_port():
     ports = list(serial.tools.list_ports.comports())
@@ -36,10 +36,12 @@ def get_serial_port():
             if p.description and ('USB Serial Port' in p.description or 'TTL232R-3V3' in p.description) :
                 return p.device
 
+
         if p.manufacturer and 'FTDI' in p.manufacturer or 'TTL232R-3V3' in p.description:
             # Enable if you want to see debug msg if the device found
             # print( 'found it', p.manufacturer)
             return p.device
+
     return None
 
 def init_serial_port(_port):
@@ -61,9 +63,12 @@ def init_serial_port(_port):
         except (ValueError,IOError,Exception) as ex:
             print("error init serial port: " + str(ex))
             return None
-        
+
+
+
 # no need to add \n as it will be added at the end of each message
 def set_light_level_color_temperature(_serialDevice, _lightLevelValue =50, _colourTemperatureValue = 3900, id = 0):
+    _serialDevice.close()
     if not _serialDevice.isOpen():
         try:
             # uncomment for debugging
@@ -83,23 +88,48 @@ def set_light_level_color_temperature(_serialDevice, _lightLevelValue =50, _colo
             # uncomment for debugging
             print("writing " , str(serial_msg).encode() , " to " + str(_serialDevice.port))
             ser.write(str(serial_msg).encode())
-            time.sleep(0.005)
+            time.sleep(0.05)
         except (ValueError,IOError,Exception) as ex:
             # uncomment for debugging
             # print("error in serial communication : " + str(ex))
             return None
 
 
+def set_light_level(_serialDevice, _lightLevelValue =50, id = 0):
+    _serialDevice.close()
+    if not _serialDevice.isOpen():
+        try:
+            # uncomment for debugging
+            # print('Serial device is not open, trying to open it')
+            _serialDevice.open()
+        except (ValueError,IOError) as ex:
+            # uncomment for debugging
+            # print("error opening serial port: " + str(ex))
+            return None
+
+    if _serialDevice.isOpen():
+        try:
+            ser = _serialDevice
+            lightValIndex = min(range(len(LIGHT_LEVEL_ARRAY)), key = lambda i: abs(LIGHT_LEVEL_ARRAY[i]-_lightLevelValue))
+            #colourTempValIndex = min(range(len(COLOUR_TEMPERATURE_ARRAY)), key = lambda i: abs(COLOUR_TEMPERATURE_ARRAY[i]-_colourTemperatureValue))
+            serial_msg = '25' + str(LUMINAIRE_IDS[id]) + '0017' + str(DALI_LIGHT_LEVEL_HEX_ARRAY[lightValIndex]) + LUMIAIRE_MODE + 'FF\n'
+            # uncomment for debugging
+            print("writing " , str(serial_msg).encode() , " to " + str(_serialDevice.port))
+            ser.write(str(serial_msg).encode())
+            time.sleep(0.05)
+        except (ValueError,IOError,Exception) as ex:
+            # uncomment for debugging
+            # print("error in serial communication : " + str(ex))
+            return None
+
+Port_name = get_serial_port()
+Serial_Device = init_serial_port(Port_name)
 
 def control_light(LIGHT_LEVEL, COLOUR_TEMPERATURE, ID):
-    Port_name = get_serial_port()
-    Serial_Device = init_serial_port(Port_name)
     set_light_level_color_temperature(Serial_Device, LIGHT_LEVEL, COLOUR_TEMPERATURE, ID)
 
 
 def blink():
-    Port_name = get_serial_port()
-    Serial_Device = init_serial_port(Port_name)
     set_light_level_color_temperature(Serial_Device, 100, 3000, 0)
     i = 0
     while i<4:
@@ -112,23 +142,43 @@ def blink():
 
 
 def switch_on_entrance():
-    Port_name = get_serial_port()
-    Serial_Device = init_serial_port(Port_name)
-    set_light_level_color_temperature(Serial_Device, 100, 5000, 0)
+    set_light_level(Serial_Device, 100, 1)
+    time.sleep(0.05)
+    set_light_level(Serial_Device, 100, 1)
+
 
 def switch_off_entrance():
-    Port_name = get_serial_port()
-    Serial_Device = init_serial_port(Port_name)
-    set_light_level_color_temperature(Serial_Device, 0, 0, 0)
+    set_light_level(Serial_Device, 0, 1)
+    time.sleep(0.05)
+    set_light_level(Serial_Device, 0, 1)
 
 
 def main():
+    
+
+    set_light_level(Serial_Device, 100, 1)
+    time.sleep(1)
+
+    set_light_level_color_temperature(Serial_Device, 100, 6000, 0)
+
+
+    #blink()
     # Example Usage :
-    Port_name = get_serial_port()
-    if Port_name:
-        # port Exists so init it
-        Serial_Device = init_serial_port(Port_name)
-        
+    # Port_name = get_serial_port()
+    # if Port_name:
+    #     # port Exists so init it
+    #     Serial_Device1 = init_serial_port(Port_name[0])
+    #     Serial_Device2 = init_serial_port(Port_name[1])
+
+    #     set_light_level_color_temperature(Serial_Device1, 10, 5000, 1)
+    #     set_light_level_color_temperature(Serial_Device2, 10, 5000, 1)
+
+        # set_light_level_color_temperature(Serial_Device1, 100, 5000, 1)
+        # set_light_level_color_temperature(Serial_Device2, 100, 5000, 1)
+
+
+
+        #blink()
         # if Serial_Device:
             # i = 0
             # while True:
@@ -144,5 +194,3 @@ if __name__ == '__main__':
 	main() 
 
 
-Port_name = get_serial_port()
-Serial_Device = init_serial_port(Port_name)
