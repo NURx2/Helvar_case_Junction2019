@@ -25,6 +25,8 @@ LUMIAIRE_MODE = "00"
 
 
 
+
+
 def get_serial_port():
     ports = list(serial.tools.list_ports.comports())
     for p in ports:
@@ -90,10 +92,14 @@ def set_light_level_color_temperature(_serialDevice, _lightLevelValue =50, _colo
 
 
 def control_light(LIGHT_LEVEL, COLOUR_TEMPERATURE, ID):
+    Port_name = get_serial_port()
+    Serial_Device = init_serial_port(Port_name)
     set_light_level_color_temperature(Serial_Device, LIGHT_LEVEL, COLOUR_TEMPERATURE, ID)
 
 
 def blink():
+    Port_name = get_serial_port()
+    Serial_Device = init_serial_port(Port_name)
     set_light_level_color_temperature(Serial_Device, 100, 3000, 0)
     i = 0
     while i<4:
@@ -106,10 +112,14 @@ def blink():
 
 
 def switch_on_entrance():
-    set_light_level_color_temperature(Serial_Device, 100, 100, 1)
+    Port_name = get_serial_port()
+    Serial_Device = init_serial_port(Port_name)
+    set_light_level_color_temperature(Serial_Device, 100, 5000, 0)
 
 def switch_off_entrance():
-    set_light_level_color_temperature(Serial_Device, 0, 0, 1)
+    Port_name = get_serial_port()
+    Serial_Device = init_serial_port(Port_name)
+    set_light_level_color_temperature(Serial_Device, 0, 0, 0)
 
 
 def main():

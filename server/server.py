@@ -33,17 +33,18 @@ def switch_off_entrance():
 
 @app.route('/move/<string:frm>/<string:to>')
 def move(frm,to):
+	socketio.emit('update', {'frm': frm, 'to': to})
 
 	if frm == 'living':
-		control_light(0, 0)
+		control_light(0, 0, 0)
 		switch_on_entrance()
 		print(1)
 
-	if frm == 'entarance':
+	if frm == 'entrance':
 		if to == 'kitchen':
-			control_light(0, 0)
+			control_light(0, 0, 0)
 		if to == 'living':
-			control_light(100, 5000)
+			control_light(100, 5000, 0)
 
 		switch_off_entrance()
 		print(2)
@@ -60,11 +61,8 @@ def test_connect():
 
 @app.route('/send_socket/<int:id>/<int:level>/<int:temp>')
 def send_socket(id, level, temp):
-	update(id, level, temp)
-	return "OK"
-
-def update(id, level, temp):
 	socketio.emit('update', {'id': id, 'level': level, 'temp': temp })
+	return "OK"
 
 if __name__ == '__main__':
     socketio.run(app)
