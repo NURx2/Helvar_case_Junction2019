@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/topButtonHorizontalPadding"
+        android:paddingEnd="@dimen/topButtonHorizontalPadding"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/backButton"
+            android:src="@drawable/back"
+            android:background="@android:color/transparent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_width="@dimen/topButtonsSize"
+            android:layout_height="@dimen/topButtonsSize" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/heading"
+        android:text="@string/smartModeText"
+        android:layout_marginTop="@dimen/headingTopMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/headingTextSize"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/black"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/modesAnchor"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:paddingStart="@dimen/pagesHorizontalPadding"
+        android:paddingEnd="@dimen/pagesHorizontalPadding"
+        app:layout_constraintTop_toBottomOf="@id/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="topButtonsSize">36dp</dimen>
+    <dimen name="seekBarIconsSize">30dp</dimen>
+    <dimen name="seekBarVerticalPadding">16dp</dimen>
+    <dimen name="headingTopMargin">110dp</dimen>
+    <dimen name="pagesHorizontalPadding">48dp</dimen>
+    <dimen name="headingTextSize">36sp</dimen>
+    <dimen name="topButtonHorizontalPadding">20dp</dimen>
+</resources>
