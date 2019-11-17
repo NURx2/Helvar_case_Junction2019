@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HelvarApp</string>
+    <string name="cannotAddRoom">Need more permissions</string>
+    <string name="sensor_checkbox_label">Turn on by sensor</string>
+    <string name="smartModeText">Smart mode</string>
+    <string name="newRoomHeadingText">Add new room</string>
+    <string name="addNewRoomNameLabel">Name:</string>
+    <string name="addNewRoomPresetLabel">Preset:</string>
+    <string name="save_string">Save</string>
+    <string name="saving_dialog_text">Please wait while we are collecting wifi profile for this room</string>
+</resources>
