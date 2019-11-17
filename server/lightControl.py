@@ -127,29 +127,34 @@ Serial_Device = init_serial_port(Port_name)
 
 def control_light(LIGHT_LEVEL, COLOUR_TEMPERATURE, ID):
     set_light_level_color_temperature(Serial_Device, LIGHT_LEVEL, COLOUR_TEMPERATURE, ID)
+    time.sleep(0.5)
+    set_light_level_color_temperature(Serial_Device, LIGHT_LEVEL, COLOUR_TEMPERATURE, ID)
+
 
 
 def blink():
-    set_light_level_color_temperature(Serial_Device, 100, 3000, 0)
+    set_light_level_color_temperature(Serial_Device, 100, 5000, 0)
+    time.sleep(0.05)
+
     i = 0
     while i<4:
-        set_light_level_color_temperature(Serial_Device, 100, 2000, 0)
+        set_light_level_color_temperature(Serial_Device, 100, 5000, 0)
         time.sleep(1)
-        set_light_level_color_temperature(Serial_Device, 0, 2000, 0)
+        set_light_level_color_temperature(Serial_Device, 0, 5000, 0)
         time.sleep(1)
         i+=1
-    set_light_level_color_temperature(Serial_Device, 100, 2000, 0)
+    set_light_level_color_temperature(Serial_Device, 100, 5000, 0)
 
 
 def switch_on_entrance():
     set_light_level(Serial_Device, 100, 1)
-    time.sleep(0.05)
+    time.sleep(0.5)
     set_light_level(Serial_Device, 100, 1)
 
 
 def switch_off_entrance():
     set_light_level(Serial_Device, 0, 1)
-    time.sleep(0.05)
+    time.sleep(0.5)
     set_light_level(Serial_Device, 0, 1)
 
 
