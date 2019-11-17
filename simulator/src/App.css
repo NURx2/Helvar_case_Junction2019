@@ -1,0 +1,135 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+div {
+  padding: 0;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.TitleBar {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  z-index: 3;
+}
+
+.StatusBar {
+  flex: 1;
+  background-color: #71A065;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.TitleLampsBar {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  background-color: white;
+  width: 450px;
+}
+
+.LampStatusDown {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid black;
+  margin: 0;
+  height: 50px;
+  background-color: #971122;
+  font-size: 15px;
+}
+
+.LampStatusUp {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid black;
+  margin: 0;
+  height: 50px;
+  background-color: #FF0000;
+  font-size: 15px;
+}
+
+.LampStatus {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid black;
+  margin: 0;
+  height: 50px;
+  background-color: #CB0032;
+  font-size: 15px;
+}
+
+LampName {
+  flex: 1;
+}
+
+.LampParams {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.LampParam {
+  text-align: center;
+  flex: 1
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.RoomNameLiving {
+  position: relative;
+  left: -120px;
+  top: -290px;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+
+  border: black 1px solid;
+}
+
+.RoomNameKitchen {
+  position: relative;
+  left: 70px;
+  top: -480px;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+
+
+  border: black 1px solid;
+}
+
+.RoomNameEntrance {
+  position: relative;
+  left: -67px;
+  top: -178px;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+
+  border: black 1px solid;
+}
